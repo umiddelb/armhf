@@ -1,0 +1,1 @@
+../common/ubuntu-core-01.sh
