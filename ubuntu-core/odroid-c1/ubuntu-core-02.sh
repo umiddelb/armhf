@@ -2,7 +2,8 @@
 
 locale-gen en_GB.UTF-8
 locale-gen de_DE.UTF-8
-update-locale LANG=en_GB.UTF-8 LC_MESSAGES=POSIX
+export LC_ALL="en_GB.UTF-8"
+update-locale LC_ALL=en_GB.UTF-8 LANG=en_GB.UTF-8 LC_MESSAGES=POSIX
 dpkg-reconfigure locales
 echo "Europe/Berlin" > /etc/timezone
 dpkg-reconfigure -f noninteractive tzdata
@@ -46,7 +47,7 @@ echo "stop on runlevel [!12345]" >> /etc/init/ttyS0.conf
 echo "respawn" >> /etc/init/ttyS0.conf
 echo "exec /sbin/getty -L 115200 ttyS0 vt102" >> /etc/init/ttyS0.conf
 
-adduser ubuntu
+adduser --gecos '' ubuntu
 usermod -aG adm,cdrom,sudo,plugdev ubuntu
 
 apt-get clean
