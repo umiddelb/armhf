@@ -1,6 +1,7 @@
 # armhf
+interesting stuff about arm devices (utilite,cubox-i,odroid-c1)
 
-You may jump to the [wiki pages](https://github.com/umiddelb/armhf/wiki)
+You may take a look at the [wiki pages](https://github.com/umiddelb/armhf/wiki)
 
 * [Installing, running, using docker on armhf (ARMv7) devices](https://github.com/umiddelb/armhf/wiki/Installing,-running,-using-docker-on-armhf-(ARMv7)-devices)
 
