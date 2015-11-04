@@ -25,9 +25,11 @@
 
 FROM armv7/armhf-ubuntu:14.04
 MAINTAINER Tianon Gravi <admwiggin@gmail.com> (@tianon)
+
 ENV HOME /root
 ENV MAKEFLAGS -j4
 ENV DEBIAN_FRONTEND noninteractive
+
 RUN	apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys E871F18B51E0147C77796AC81196BA81F6B0FC61
 RUN	echo deb http://ppa.launchpad.net/zfs-native/stable/ubuntu utopic main > /etc/apt/sources.list.d/zfs.list
 
@@ -42,13 +44,16 @@ RUN apt-get update && apt-get install -y \
 	createrepo \
 	curl \
 	dpkg-sig \
+	gcc-mingw-w64 \
 	git \
 	iptables \
 	libapparmor-dev \
 	libcap-dev \
 	libsqlite3-dev \
+	libsystemd-journal-dev \
 	mercurial \
 	parallel \
+	pkg-config \
 	python-mock \
 	python-pip \
 	python-websocket \
@@ -82,7 +87,7 @@ RUN cd /usr/src/lxc \
 	&& ldconfig
 
 # Install Go
-ENV GO_VERSION 1.4.2
+ENV GO_VERSION 1.4.3
 RUN curl -sSL https://golang.org/dl/go${GO_VERSION}.src.tar.gz | tar -v -C /usr/local -xz \
 	&& mkdir -p /go/bin
 ENV PATH /go/bin:/usr/local/go/bin:$PATH
@@ -140,8 +145,8 @@ RUN set -x \
 	&& rm -rf "$GOPATH"
 
 # Install notary server
-#ENV NOTARY_COMMIT 8e8122eb5528f621afcd4e2854c47302f17392f7
-#RUN set -x \
+# ENV NOTARY_COMMIT 8e8122eb5528f621afcd4e2854c47302f17392f7
+# RUN set -x \
 #	&& export GOPATH="$(mktemp -d)" \
 #	&& git clone https://github.com/docker/notary.git "$GOPATH/src/github.com/docker/notary" \
 #	&& (cd "$GOPATH/src/github.com/docker/notary" && git checkout -q "$NOTARY_COMMIT") \
@@ -150,10 +155,11 @@ RUN set -x \
 #	&& rm -rf "$GOPATH"
 
 # Get the "docker-py" source so we can run their integration tests
-ENV DOCKER_PY_COMMIT 8a87001d09852058f08a807ab6e8491d57ca1e88
+ENV DOCKER_PY_COMMIT 47ab89ec2bd3bddf1221b856ffbaff333edeabb4
 RUN git clone https://github.com/docker/docker-py.git /docker-py \
 	&& cd /docker-py \
-	&& git checkout -q $DOCKER_PY_COMMIT
+	&& git checkout -q $DOCKER_PY_COMMIT \
+	&& pip install -r test-requirements.txt
 
 # Setup s3cmd config
 RUN { \
