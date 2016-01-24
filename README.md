@@ -3,6 +3,8 @@ interesting stuff about arm devices (utilite,cubox-i,odroid-c1)
 
 You may take a look at the [wiki pages](https://github.com/umiddelb/armhf/wiki)
 
+* [How-To compile a custom Linux kernel for your ARM device](https://github.com/umiddelb/armhf/wiki/How-To-compile-a-custom-Linux-kernel-for-your-ARM-device)
+
 * [Get more out of "Das-U-Boot"](https://github.com/umiddelb/armhf/wiki/Get-more-out-of-%22Das-U-Boot%22)
 
 * [Installing, running, using Docker on armhf (ARMv7) devices](https://github.com/umiddelb/armhf/wiki/Installing,-running,-using-docker-on-armhf-(ARMv7)-devices)
